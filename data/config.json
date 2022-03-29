@@ -1,0 +1,23 @@
+{
+  "visualization_type": "choropleth",
+  "graduated_symbol": {
+    "symbol_distance": {
+      "current_symbol_distance": "avg_symbol_distance_1",
+      "avg_symbol_distance_1": "",
+      "avg_symbol_distance_2": ""
+    }
+  },
+  "choropleth": {
+    "colour": {
+      "current_colour_distance": "colour_distance_1",
+      "colour_distance_1": 3,
+      "colour_distance_2": "4"
+    }
+  },
+  "dataset": {
+    "current_dataset": "Proportion of women in senior and middle management positions (%)",
+    "year": "2019",
+    "dataset_1": "Proportion of women in senior and middle management positions (%)",
+    "dataset_2": "NA"
+  }
+}
