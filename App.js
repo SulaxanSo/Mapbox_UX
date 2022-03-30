@@ -40,38 +40,14 @@ const App = () => {
     points.push(<MapboxGL.PointAnnotation key = {i} id={title} coordinate={output} />);
   }
 
-  /* for (const [topic, data] of Object.entries(dataset)) {
-    for (const [country_name, values] of Object.entries(data)){
-      console.log(country_name);
-      for (const [year, value] of Object.entries(values)){
-        console.log(`${topic} was ${value} in ${year}`);
-      }
-    }
-  } */
+  let current_dataset = config["dataset"]["current_dataset"];
+  let topic = config["dataset"][current_dataset];
 
-  let topic = config["dataset"]["current_dataset"];
   let year = config["dataset"]["year"];
-  for(let i = 0, l = countries.features.length; i < l; i++){
-    let country = countries.features[i].properties.admin;
+
+  for (let country in dataset[topic]) {
     console.log(country, "in", year, dataset[topic][country][year]);
-    if (typeof  dataset[topic][country][year] === 'undefined') {
-      console.log("test");    
-    }
   }
-  /* for(const topic in dataset){
-    if(topic == "Proportion of women in senior and middle management positions (%)"){
-      let country_list = dataset[topic];
-      for(const country in country_list){
-        console.log(country_list[country]);
-        for(const year in country_list[country]){
-          if(year == "2019"){
-            let final_value = country_list[country][year];
-          }
-        }
-      }
-    }
-  } */
-  //console.log(points);
 
   return (
     <View style={styles.page}>
