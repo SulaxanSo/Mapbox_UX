@@ -14,11 +14,24 @@ const App = () => {
   
   console.log(countries.features.length, "countries are part of the feature collection.");
   
-  let points = [];
+  const vis_type = config["visualization_type"];
+
+  const current_dataset = config["dataset"]["current_dataset"];
+  const topic = config["dataset"][current_dataset];
+
+  const year = config["dataset"]["year"];
+
+  let eur_countries = [];
+  for (let country in dataset[topic]) {
+    eur_countries.push(country);
+  }
+
+  let graduated_symbols = [];
 
   // calculate center of polygon
   for(let i = 0, l = countries.features.length; i < l; i++){
-    let title = countries.features[i].properties.admin;
+    let country = countries.features[i].properties.admin;
+    
     let output = [];
 
     if (countries.features[i].geometry.type === "Polygon"){
@@ -36,17 +49,69 @@ const App = () => {
       }
       output = polylabel(maxPolygon);
     }
-    //console.log(title, output);
-    points.push(<MapboxGL.PointAnnotation key = {i} id={title} coordinate={output} />);
+
+    let size = "";
+
+    if(eur_countries.includes(country)){
+      let incidence = dataset[topic][country][year];
+      if(incidence > 25){
+        size = 40;
+      }else{
+        size = 20;
+      }
+
+      graduated_symbols.push(
+        <MapboxGL.PointAnnotation
+          key={i}
+          id={country}
+          coordinate={output}
+        >
+          <View
+            style={{
+              height: size,
+              width: size,
+              backgroundColor: "green",
+              borderRadius: 50,
+              borderColor: "#fff",
+              borderWidth: 2,
+              opacity: 0.5
+            }}
+          />
+        </MapboxGL.PointAnnotation>
+      );
+    }
   }
 
-  let current_dataset = config["dataset"]["current_dataset"];
-  let topic = config["dataset"][current_dataset];
 
-  let year = config["dataset"]["year"];
+  let choropleth_countries = [];
 
-  for (let country in dataset[topic]) {
-    console.log(country, "in", year, dataset[topic][country][year]);
+  for(let i = 0, l = countries.features.length; i < l; i++){
+    let country = countries.features[i].properties.admin;
+    let color = "";
+
+    if(eur_countries.includes(country)){
+      let incidence = dataset[topic][country][year];
+      if(incidence > 25){
+        color = "red";
+      }else{
+        color = "green";
+      }
+    }else{
+      color = "grey";
+    }
+
+    choropleth_countries.push(
+      <MapboxGL.ShapeSource key = {i} id={country} shape={countries.features[i]} onPress={(e) => {console.log("Clicked on", e.features[0].properties.admin);}}>
+          <MapboxGL.FillLayer
+            id={country+"fill"} 
+            style={{ fillColor: color, fillOpacity: 0.5 }} 
+          />
+          <MapboxGL.LineLayer
+            id={country+"border"}
+            style={{ lineColor: "white", lineWidth: 2 }}
+          />
+        </MapboxGL.ShapeSource>
+    );
   }
 
   return (
@@ -58,17 +123,7 @@ const App = () => {
             zoomLevel={3}
             centerCoordinate={[7.737262, 51.050407]}
           />
-          <MapboxGL.ShapeSource id="countries" shape={countries} onPress={(e) => {console.log("Clicked on", e.features[0].properties.admin);}}>
-            <MapboxGL.FillLayer
-              id="fillCountries" 
-              style={{ fillColor: "yellow", fillOpacity: 0.5 }} 
-            />
-            <MapboxGL.LineLayer
-              id="lineCountries"
-              style={{ lineColor: "white", lineWidth: 2 }}
-            />
-          </MapboxGL.ShapeSource>
-          {points}
+          {vis_type == "choropleth" ? choropleth_countries : graduated_symbols}
         </MapboxGL.MapView>
       </View>
     </View>
