@@ -1,5 +1,5 @@
 {
-  "visualization_type": "graduated_symbol",
+  "visualization_type": "choropleth",
   "graduated_symbol": {
     "symbol_distance": {
       "current_symbol_distance": "avg_symbol_distance_1",
