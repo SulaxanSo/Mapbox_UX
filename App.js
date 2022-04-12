@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import polylabel from "@mapbox/polylabel";
 import * as d3 from "d3";
-import { countries } from "./data/countries_LOW";
+import { countries } from "./data/countries_HIGH";
 import * as dataset from './data/dataset.json';
 import * as config from './data/config.json';
 import geostats from 'geostats';
@@ -21,15 +21,17 @@ const App = () => {
   const topic = config["dataset"][current_dataset];
 
   const year = config["dataset"]["year"];
+
   const no_classes = 5;
 
-  let hexes = [
+  let colors = [
     '#eff3ff',
     '#bdd7e7',
     '#6baed6',
     '#3182bd',
     '#08519c'
     ];
+  let sizes = [10, 20, 30,40,50];
 
   let eur_countries = [];
   let dataValues = [];
@@ -76,32 +78,34 @@ const App = () => {
 
     if(eur_countries.includes(country)){
       let incidence = dataset[topic][country][year];
-      if(incidence > 25){
-        size = 40;
-      }else{
-        size = 20;
-      }
+      if(incidence !== "NA"){
+        for (let j = 0; j <= no_classes-1; j++)  {
+          if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
+            size = sizes[j];
+          }
+        }
 
-      graduated_symbols.push(
-        <MapboxGL.PointAnnotation
-          key={i}
-          id={country}
-          coordinate={output}
-          onSelected={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.properties.id+"!");}}
-        >
-          <View
-            style={{
-              height: size,
-              width: size,
-              backgroundColor: "green",
-              borderRadius: 50,
-              borderColor: "#fff",
-              borderWidth: 2,
-              opacity: 0.5
-            }}
-          />
-        </MapboxGL.PointAnnotation>
-      );
+        graduated_symbols.push(
+          <MapboxGL.PointAnnotation
+            key={i}
+            id={country}
+            coordinate={output}
+            onSelected={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.properties.id+"!");}}
+          >
+            <View
+              style={{
+                height: size,
+                width: size,
+                backgroundColor: "green",
+                borderRadius: 50,
+                borderColor: "#fff",
+                borderWidth: 2,
+                opacity: 0.5
+              }}
+            />
+          </MapboxGL.PointAnnotation>
+        );
+      }
     }
   }
 
@@ -121,7 +125,7 @@ const App = () => {
       else{
         for (let j = 0; j <= no_classes-1; j++)  {
           if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
-            color = hexes[j];
+            color = colors[j];
           }
         }
       }
