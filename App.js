@@ -3,9 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import polylabel from "@mapbox/polylabel";
 import * as d3 from "d3";
-import { countries } from "./data/countries";
+import { countries } from "./data/countries_LOW";
 import * as dataset from './data/dataset.json';
 import * as config from './data/config.json';
+import geostats from 'geostats';
 
 
 MapboxGL.setAccessToken('pk.eyJ1Ijoic3VsYXhhbjI3IiwiYSI6ImNpc3JqNXRidTAwNHAyeXBiY2hxdnlsMG4ifQ.IGQkafPlHEjq7_hno0AnrA');
@@ -20,12 +21,33 @@ const App = () => {
   const topic = config["dataset"][current_dataset];
 
   const year = config["dataset"]["year"];
+  const no_classes = 5;
+
+  let hexes = [
+    '#eff3ff',
+    '#bdd7e7',
+    '#6baed6',
+    '#3182bd',
+    '#08519c'
+    ];
 
   let eur_countries = [];
+  let dataValues = [];
+
   for (let country in dataset[topic]) {
     eur_countries.push(country);
+    let countryValue = dataset[topic][country][year];
+    if (countryValue !== "NA") {		
+      dataValues.push(countryValue);  
+    }
   }
+  
+  let geoSeries = new geostats(dataValues);
+  let jenks = geoSeries.getClassJenks(no_classes);
+  console.log("JENKS:", jenks);
 
+
+  //GRADUATED SYMBOL MAPS
   let graduated_symbols = [];
 
   // calculate center of polygon
@@ -65,6 +87,7 @@ const App = () => {
           key={i}
           id={country}
           coordinate={output}
+          onSelected={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.properties.id+"!");}}
         >
           <View
             style={{
@@ -82,35 +105,46 @@ const App = () => {
     }
   }
 
-
+  //CHOROPLETH MAPS
   let choropleth_countries = [];
 
   for(let i = 0, l = countries.features.length; i < l; i++){
     let country = countries.features[i].properties.admin;
     let color = "";
+    let incidence = "";
 
     if(eur_countries.includes(country)){
-      let incidence = dataset[topic][country][year];
-      if(incidence > 25){
-        color = "red";
-      }else{
-        color = "green";
+      incidence = dataset[topic][country][year];
+      if(incidence == "NA"){
+        color = "#A8A8A8";
+      }
+      else{
+        for (let j = 0; j <= no_classes-1; j++)  {
+          if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
+            color = hexes[j];
+          }
+        }
       }
     }else{
-      color = "grey";
+      color = "#A8A8A8";
     }
 
     choropleth_countries.push(
-      <MapboxGL.ShapeSource key = {i} id={country} shape={countries.features[i]} onPress={(e) => {console.log("Clicked on", e.features[0].properties.admin);}}>
-          <MapboxGL.FillLayer
-            id={country+"fill"} 
-            style={{ fillColor: color, fillOpacity: 0.5 }} 
-          />
-          <MapboxGL.LineLayer
-            id={country+"border"}
-            style={{ lineColor: "white", lineWidth: 2 }}
-          />
-        </MapboxGL.ShapeSource>
+      <MapboxGL.ShapeSource 
+        key = {i} 
+        id={country} 
+        shape={countries.features[i]} 
+        onPress={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.features[0].properties.admin+"!");}}
+      >
+        <MapboxGL.FillLayer
+          id={country+"fill"} 
+          style={{ fillColor: color, fillOpacity: 0.5 }} 
+        />
+        <MapboxGL.LineLayer
+          id={country+"border"}
+          style={{ lineColor: "white", lineWidth: 2 }}
+        />
+      </MapboxGL.ShapeSource>
     );
   }
 
