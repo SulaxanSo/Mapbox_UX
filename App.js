@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import polylabel from "@mapbox/polylabel";
 import * as d3 from "d3";
-import { countries } from "./data/countries_HIGH";
+import { countries } from "./data/countries_LOW";
 import * as dataset from './data/dataset.json';
 import * as config from './data/config.json';
 import geostats from 'geostats';
@@ -31,7 +31,6 @@ const App = () => {
     '#3182bd',
     '#08519c'
     ];
-  let sizes = [10, 20, 30,40,50];
 
   let eur_countries = [];
   let dataValues = [];
@@ -47,6 +46,7 @@ const App = () => {
   let geoSeries = new geostats(dataValues);
   let jenks = geoSeries.getClassJenks(no_classes);
   console.log("JENKS:", jenks);
+  let sizes = [jenks[1], jenks[2], jenks[3], jenks[4], jenks[5]];
 
 
   //GRADUATED SYMBOL MAPS
@@ -98,9 +98,8 @@ const App = () => {
                 width: size,
                 backgroundColor: "green",
                 borderRadius: 50,
-                borderColor: "#fff",
-                borderWidth: 2,
-                opacity: 0.5
+                borderColor: "black",
+                borderWidth: 1,
               }}
             />
           </MapboxGL.PointAnnotation>
@@ -142,7 +141,7 @@ const App = () => {
       >
         <MapboxGL.FillLayer
           id={country+"fill"} 
-          style={{ fillColor: color, fillOpacity: 0.5 }} 
+          style={{ fillColor: color, fillOpacity: 0.9 }} 
         />
         <MapboxGL.LineLayer
           id={country+"border"}
@@ -152,10 +151,57 @@ const App = () => {
     );
   }
 
+  let labels = [];
+
+  if(vis_type === "choropleth"){
+    for (let i = 0; i < jenks.length-1; i++) {
+      let from = jenks[i];
+      let to = jenks[i + 1];
+  
+      labels.push(
+        <View key={i} style={styles.legendItems}>
+          <View style={[styles.itemSymbol, {backgroundColor: colors[i]}]}></View>
+          <Text style={styles.itemText}>{from + " - " + to}</Text>
+        </View>
+      );
+    }
+
+    labels.push(
+      <View key={jenks.length-1} style={styles.legendItems}>
+        <View style={[styles.itemSymbol, {backgroundColor: '#A8A8A8'}]}></View>
+        <Text style={styles.itemText}>NO DATA</Text>
+      </View>
+    );
+
+  }else{
+    for (let i = 0; i < jenks.length-1; i++) {
+      let from = jenks[i];
+      let to = jenks[i + 1];
+  
+      labels.push(
+        <View key={i} style={styles.legendItems}>
+          <View
+              style={{
+                height: jenks[i+1],
+                width: jenks[i+1],
+                backgroundColor: "green",
+                borderRadius: 50,
+                borderColor: "#",
+                borderWidth: 1,
+              }}
+            />
+          <Text style={styles.itemText}>{from + " - " + to}</Text>
+        </View>
+      );
+    }
+  }
+  
   return (
     <View style={styles.page}>
       <View style={styles.container}>
-        <MapboxGL.MapView style={styles.map}>
+        <MapboxGL.MapView style={styles.map}
+          styleURL={MapboxGL.StyleURL.Light}
+        >
           <MapboxGL.Camera 
             animationDuration={0}
             zoomLevel={3}
@@ -163,6 +209,10 @@ const App = () => {
           />
           {vis_type == "choropleth" ? choropleth_countries : graduated_symbols}
         </MapboxGL.MapView>
+        <View style={styles.legendContainer}>
+          <Text style={styles.legendTitle}>{topic}:</Text>
+          {labels}
+        </View>
       </View>
     </View>
   );
@@ -182,6 +232,38 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1
+  },
+  legendContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: "#cfcfcf",
+    opacity: 0.9,
+    borderRadius: 10,
+    borderColor: 'white',
+    borderWidth: 1,
+    bottom: 30,
+    left: 30,
+    height: '35%',
+    width: '20%',
+    padding: 10,
+    position: 'absolute',
+    justifyContent: 'space-evenly'
+  }, 
+  legendTitle: {
+    fontSize: 12, 
+    fontWeight: "bold"
+  },
+  legendItems: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  itemSymbol: {
+    height: 40, 
+    width: 40
+  }, 
+  itemText: {
+    fontSize: 9,
   }
 });
 
