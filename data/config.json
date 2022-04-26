@@ -8,10 +8,13 @@
     }
   },
   "choropleth": {
-    "colour": {
-      "current_colour_distance": "colour_distance_1",
-      "colour_distance_1": 3,
-      "colour_distance_2": "4"
+    "color": {
+      "current_color_distance": "color_distance_5",
+      "color_distance_1": 4,
+      "color_distance_2": 6,
+      "color_distance_3": 8,
+      "color_distance_4": 10,
+      "color_distance_5": 12 
     }
   },
   "dataset": {

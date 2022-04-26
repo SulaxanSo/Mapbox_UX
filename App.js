@@ -22,15 +22,69 @@ const App = () => {
 
   const year = config["dataset"]["year"];
 
+  const current_col_dist = config["choropleth"]["color"]["current_color_distance"];
+  const col_dist = config["choropleth"]["color"][current_col_dist];
+
   const no_classes = 5;
 
-  let colors = [
-    '#eff3ff',
-    '#bdd7e7',
-    '#6baed6',
-    '#3182bd',
+  let colors_four = [
+    '#617ab6',
+    '#5371b0',
+    '#4166a9',
+    '#2c5ba3',
     '#08519c'
     ];
+  
+  let colors_six = [
+    '#7e90c3',
+    '#687fb9',
+    '#5471b0',
+    '#3a62a7',
+    '#08519c'
+    ];
+
+  let colors_eight = [
+    '#9ca8d0',
+    '#7f90c3',
+    '#627bb6',
+    '#4266aa',
+    '#08519c'
+    ];
+    
+  let colors_ten = [
+    '#bac1de',
+    '#92a0cc',
+    '#6e83bb',
+    '#4a6bad',
+    '#08519c'
+    ];
+
+  let colors_twelve = [
+    '#d9dded',
+    '#a9b3d7',
+    '#7d8fc2',
+    '#5270b0',
+    '#08519c'
+    ];
+  
+  let current_col_palette;
+  switch (col_dist) {
+    case 4:
+      current_col_palette = colors_four;
+        break;
+    case 6:
+      current_col_palette = colors_six;
+        break;
+    case 8:
+      current_col_palette = colors_eight;
+        break;
+    case 10:
+      current_col_palette = colors_ten;
+        break;
+    case 12:
+      current_col_palette = colors_twelve;
+        break;
+  }
 
   let eur_countries = [];
   let dataValues = [];
@@ -46,6 +100,18 @@ const App = () => {
   let geoSeries = new geostats(dataValues);
   let jenks = geoSeries.getClassJenks(no_classes);
   console.log("JENKS:", jenks);
+
+  // ----------------------------------------
+  // RADIUS??
+  let radius = [];
+  for (let i = 0; i < jenks.length-1; i++) {
+    let r = (Math.sqrt(jenks[i+1]/Math.PI));
+    let d = r * 2;
+    radius.push(d);
+  }
+  console.log(radius);
+  // ----------------------------------------
+
   let sizes = [jenks[1], jenks[2], jenks[3], jenks[4], jenks[5]];
 
 
@@ -97,7 +163,7 @@ const App = () => {
                 height: size,
                 width: size,
                 backgroundColor: "green",
-                borderRadius: 50,
+                borderRadius: size/2,
                 borderColor: "black",
                 borderWidth: 1,
               }}
@@ -124,7 +190,7 @@ const App = () => {
       else{
         for (let j = 0; j <= no_classes-1; j++)  {
           if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
-            color = colors[j];
+            color = current_col_palette[j];
           }
         }
       }
@@ -160,7 +226,7 @@ const App = () => {
   
       labels.push(
         <View key={i} style={styles.legendItems}>
-          <View style={[styles.itemSymbol, {backgroundColor: colors[i]}]}></View>
+          <View style={[styles.itemSymbol, {backgroundColor: current_col_palette[i]}]}></View>
           <Text style={styles.itemText}>{from + " - " + to}</Text>
         </View>
       );
@@ -186,7 +252,7 @@ const App = () => {
                 width: jenks[i+1],
                 backgroundColor: "green",
                 borderRadius: 50,
-                borderColor: "#",
+                borderColor: "black",
                 borderWidth: 1,
               }}
             />
@@ -243,8 +309,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     bottom: 30,
     left: 30,
-    height: '35%',
-    width: '20%',
+    height: 400,
+    width: 175,
     padding: 10,
     position: 'absolute',
     justifyContent: 'space-evenly'
