@@ -1,15 +1,32 @@
 {
-  "visualization_type": "graduated_symbol",
+  "visualization_type": "choropleth",
   "graduated_symbol": {
     "symbol_distance": {
       "current_symbol_distance": "avg_symbol_distance_1",
       "avg_symbol_distance_1": "",
       "avg_symbol_distance_2": ""
+    },
+    "constant":{
+      "current_constant": "constant_14",
+      "constant_1": 4,
+      "constant_2": 5,
+      "constant_3": 6,
+      "constant_4": 7,
+      "constant_5": 8,
+      "constant_6": 9,
+      "constant_7": 10,
+      "constant_8": 11,
+      "constant_9": 12,
+      "constant_10": 13,
+      "constant_11": 14,
+      "constant_12": 15,
+      "constant_13": 16,
+      "constant_14": 17
     }
   },
   "choropleth": {
     "color": {
-      "current_color_distance": "color_distance_5",
+      "current_color_distance": "color_distance_3",
       "color_distance_1": 4,
       "color_distance_2": 6,
       "color_distance_3": 8,

@@ -13,7 +13,7 @@ MapboxGL.setAccessToken('pk.eyJ1Ijoic3VsYXhhbjI3IiwiYSI6ImNpc3JqNXRidTAwNHAyeXBi
 
 const App = () => {
   
-  console.log(countries.features.length, "countries are part of the feature collection.");
+  console.log(countries.features.length +  " countries are part of the feature collection.");
   
   const vis_type = config["visualization_type"];
 
@@ -24,6 +24,9 @@ const App = () => {
 
   const current_col_dist = config["choropleth"]["color"]["current_color_distance"];
   const col_dist = config["choropleth"]["color"][current_col_dist];
+  
+  const current_constant = config["graduated_symbol"]["constant"]["current_constant"];
+  const constant = config["graduated_symbol"]["constant"][current_constant];
 
   const no_classes = 5;
 
@@ -103,16 +106,19 @@ const App = () => {
 
   // ----------------------------------------
   // RADIUS??
+  let act_radius = [];
   let radius = [];
   for (let i = 0; i < jenks.length-1; i++) {
     let r = (Math.sqrt(jenks[i+1]/Math.PI));
-    let d = r * 2;
+    act_radius.push(r*2);
+    let d = r * 2 * constant;
     radius.push(d);
   }
-  console.log(radius);
+  console.log("actual diameter", act_radius);
+  console.log("diameter multiplied by constant", radius);
   // ----------------------------------------
 
-  let sizes = [jenks[1], jenks[2], jenks[3], jenks[4], jenks[5]];
+  let sizes = radius;
 
 
   //GRADUATED SYMBOL MAPS
@@ -248,8 +254,8 @@ const App = () => {
         <View key={i} style={styles.legendItems}>
           <View
               style={{
-                height: jenks[i+1],
-                width: jenks[i+1],
+                height: sizes[i],
+                width: sizes[i],
                 backgroundColor: "green",
                 borderRadius: 50,
                 borderColor: "black",
@@ -261,7 +267,7 @@ const App = () => {
       );
     }
   }
-  
+
   return (
     <View style={styles.page}>
       <View style={styles.container}>
