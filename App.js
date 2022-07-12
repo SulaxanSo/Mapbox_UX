@@ -13,14 +13,12 @@ MapboxGL.setAccessToken('pk.eyJ1Ijoic3VsYXhhbjI3IiwiYSI6ImNpc3JqNXRidTAwNHAyeXBi
 
 const App = () => {
   
-  console.log(countries.features.length +  " countries are part of the feature collection.");
+  //console.log(countries.features.length +  " countries are part of the feature collection.");
   
   const vis_type = config["visualization_type"];
 
   const current_dataset = config["dataset"]["current_dataset"];
   const topic = config["dataset"][current_dataset];
-
-  const year = config["dataset"]["year"];
 
   const current_col_dist = config["choropleth"]["color"]["current_color_distance"];
   const col_dist = config["choropleth"]["color"][current_col_dist];
@@ -30,6 +28,106 @@ const App = () => {
 
   const no_classes = 5;
 
+  // jenks calculation
+  let eur_countries = [];
+  let dataValues = [];
+
+  for (let country in dataset[topic]) {
+    eur_countries.push(country);
+    let countryValue = dataset[topic][country]["val"];
+    if (countryValue !== "NA") {		
+      dataValues.push(countryValue);  
+    }
+  }
+  
+  let geoSeries = new geostats(dataValues);
+  let jenks = geoSeries.getClassJenks(no_classes);
+  console.log("JENKS:", jenks);
+
+  // calculating average size distance in dataset
+  // let avg_size_dist = ((jenks[2]/jenks[1])+(jenks[3]/jenks[2])+(jenks[4]/jenks[3])+(jenks[5]/jenks[4]))/(no_classes-1);
+  // console.log("AVERAGE SIZE DISTANCE: " + current_dataset , avg_size_dist);
+
+  // GRADUATED SYMBOL MAP
+  // let act_radius = [];
+  // let radius = [];
+  // for (let i = 0; i < jenks.length-1; i++) {
+  //   let r = (Math.sqrt(jenks[i]/Math.PI));
+  //   act_radius.push(r);
+  //   let d = r * 2 * constant;
+  //   radius.push(d);
+  // }
+
+  // let sizes = radius;
+
+  // console.log("actual radius: " + act_radius);
+  // console.log("diameter multiplied by constant: " + radius);
+  
+  let sizes = [10];
+  for(let i= 1; i<=4; i++){
+    sizes.push(sizes[0] + i * constant);
+  }
+  console.log(sizes);
+
+  let graduated_symbols = [];
+
+  // calculate center of polygon
+  for(let i = 0, l = countries.features.length; i < l; i++){
+    let country = countries.features[i].properties.admin;
+    
+    let output = [];
+
+    if (countries.features[i].geometry.type === "Polygon"){
+      output = polylabel(countries.features[i].geometry.coordinates);
+    }
+    else {
+      let maxArea = 0, maxPolygon = [];
+      for (let j = 0, m = countries.features[i].geometry.coordinates.length; j < m; j++){
+        const p = countries.features[i].geometry.coordinates[j];
+        const area = d3.geoArea({type: "Polygon", coordinates: p})
+        if (area > maxArea){
+          maxPolygon = p;
+          maxArea = area;
+        }
+      }
+      output = polylabel(maxPolygon);
+    }
+
+    let size = "";
+
+    if(eur_countries.includes(country)){
+      let incidence = dataset[topic][country]["val"];
+      if(incidence !== "NA"){
+        for (let j = 0; j <= no_classes-1; j++)  {
+          if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
+            size = sizes[j];
+          }
+        }
+
+        graduated_symbols.push(
+          <MapboxGL.PointAnnotation
+            key={i}
+            id={country}
+            coordinate={output}
+            onSelected={(e) => {console.log("There was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.properties.id+"!");}}
+          >
+            <View
+              style={{
+                height: size,
+                width: size,
+                backgroundColor: "green",
+                borderRadius: size/2,
+                borderColor: "black",
+                borderWidth: 1,
+              }}
+            />
+          </MapboxGL.PointAnnotation>
+        );
+      }
+    }
+  }
+
+  //CHOROPLETH MAPS
   let colors_four = [
     '#617ab6',
     '#5371b0',
@@ -89,107 +187,15 @@ const App = () => {
         break;
   }
 
-  let eur_countries = [];
-  let dataValues = [];
-
-  for (let country in dataset[topic]) {
-    eur_countries.push(country);
-    let countryValue = dataset[topic][country][year];
-    if (countryValue !== "NA") {		
-      dataValues.push(countryValue);  
-    }
-  }
-  
-  let geoSeries = new geostats(dataValues);
-  let jenks = geoSeries.getClassJenks(no_classes);
-  console.log("JENKS:", jenks);
-
-  // ----------------------------------------
-  // RADIUS??
-  let act_radius = [];
-  let radius = [];
-  for (let i = 0; i < jenks.length-1; i++) {
-    let r = (Math.sqrt(jenks[i+1]/Math.PI));
-    act_radius.push(r*2);
-    let d = r * 2 * constant;
-    radius.push(d);
-  }
-  console.log("actual diameter", act_radius);
-  console.log("diameter multiplied by constant", radius);
-  // ----------------------------------------
-
-  let sizes = radius;
-
-
-  //GRADUATED SYMBOL MAPS
-  let graduated_symbols = [];
-
-  // calculate center of polygon
-  for(let i = 0, l = countries.features.length; i < l; i++){
-    let country = countries.features[i].properties.admin;
-    
-    let output = [];
-
-    if (countries.features[i].geometry.type === "Polygon"){
-      output = polylabel(countries.features[i].geometry.coordinates);
-    }
-    else {
-      let maxArea = 0, maxPolygon = [];
-      for (let j = 0, m = countries.features[i].geometry.coordinates.length; j < m; j++){
-        const p = countries.features[i].geometry.coordinates[j];
-        const area = d3.geoArea({type: "Polygon", coordinates: p})
-        if (area > maxArea){
-          maxPolygon = p;
-          maxArea = area;
-        }
-      }
-      output = polylabel(maxPolygon);
-    }
-
-    let size = "";
-
-    if(eur_countries.includes(country)){
-      let incidence = dataset[topic][country][year];
-      if(incidence !== "NA"){
-        for (let j = 0; j <= no_classes-1; j++)  {
-          if (incidence >= (jenks[j]) && incidence <= (jenks[j + 1])) {
-            size = sizes[j];
-          }
-        }
-
-        graduated_symbols.push(
-          <MapboxGL.PointAnnotation
-            key={i}
-            id={country}
-            coordinate={output}
-            onSelected={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.properties.id+"!");}}
-          >
-            <View
-              style={{
-                height: size,
-                width: size,
-                backgroundColor: "green",
-                borderRadius: size/2,
-                borderColor: "black",
-                borderWidth: 1,
-              }}
-            />
-          </MapboxGL.PointAnnotation>
-        );
-      }
-    }
-  }
-
-  //CHOROPLETH MAPS
   let choropleth_countries = [];
 
   for(let i = 0, l = countries.features.length; i < l; i++){
     let country = countries.features[i].properties.admin;
     let color = "";
     let incidence = "";
-
+    
     if(eur_countries.includes(country)){
-      incidence = dataset[topic][country][year];
+      incidence = dataset[topic][country]["val"];
       if(incidence == "NA"){
         color = "#A8A8A8";
       }
@@ -209,7 +215,7 @@ const App = () => {
         key = {i} 
         id={country} 
         shape={countries.features[i]} 
-        onPress={(e) => {console.log("In", year, "there was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.features[0].properties.admin+"!");}}
+        onPress={(e) => {console.log("There was a", topic.toLowerCase().slice(0, -4), "of", incidence, "% in", e.features[0].properties.admin+"!");}}
       >
         <MapboxGL.FillLayer
           id={country+"fill"} 
@@ -217,7 +223,7 @@ const App = () => {
         />
         <MapboxGL.LineLayer
           id={country+"border"}
-          style={{ lineColor: "white", lineWidth: 2 }}
+          style={{ lineColor: "white", lineWidth: 0.5 }}
         />
       </MapboxGL.ShapeSource>
     );

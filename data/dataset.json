@@ -1,136 +1,698 @@
 {
-  "Proportion of women in senior and middle management positions (%)": {
-    "Switzerland": {
-      "2014": 28.55,
-      "2019": 23.46
-    },
-    "Bulgaria": {
-      "2014": 35.36,
-      "2019": 39.25
-    },
-    "Belgium": {
-      "2014": 31.3,
-      "2019": 31.88
-    },
+  "Proportion of women in senior and middle management positions in 2019 (%)": {
     "Albania": {
-      "2014": 20.62,
-      "2019": 41.34
-    },
-    "Bosnia and Herzegovina": {
-      "2014": 24.16,
-      "2019": 25.43
-    },
-    "Czech Republic": {
-      "2014": 26.62,
-      "2019": 26.61
+      "val": 41.34
     },
     "Austria": {
-      "2014": 27.85,
-      "2019": 32.01
+      "val": 32.01
     },
-    "Denmark": {
-      "2014": "NA",
-      "2019": 26.63
+    "Belarus": {
+      "val": "NA"
     },
-    "Estonia": {
-      "2014": 30.84,
-      "2019": 35.11
+    "Belgium": {
+      "val": 31.88
     },
-    "Finland": {
-      "2014": 34.26,
-      "2019": 36.76
+    "Bosnia and Herzegovina": {
+      "val": 25.43
     },
-    "France": {
-      "2014": 32.03,
-      "2019": 34.24
-    },
-    "United Kingdom": {
-      "2014": 32.86,
-      "2019": 34.91
-    },
-    "Germany": {
-      "2014": 27.77,
-      "2019": 28.59
-    },
-    "Spain": {
-      "2014": 29.4,
-      "2019": 33.72
-    },
-    "Greece": {
-      "2014": 27.83,
-      "2019": 29.77
-    },
-    "Hungary": {
-      "2014": 37.59,
-      "2019": 35.9
-    },
-    "Iceland": {
-      "2014": 38.24,
-      "2019": 44.01
-    },
-    "Ireland": {
-      "2014": 31.64,
-      "2019": 31.26
-    },
-    "Italy": {
-      "2014": 21.9,
-      "2019": 23.27
+    "Bulgaria": {
+      "val": 39.25
     },
     "Croatia": {
-      "2014": 24.37,
-      "2019": 24.27
+      "val": 24.27
+    },
+    "Czech Republic": {
+      "val": 26.61
+    },
+    "Denmark": {
+      "val": 26.63
+    },
+    "Estonia": {
+      "val": 35.11
+    },
+    "Finland": {
+      "val": 36.76
+    },
+    "France": {
+      "val": 34.24
+    },
+    "Germany": {
+      "val": 28.59
+    },
+    "Greece": {
+      "val": 29.77
+    },
+    "Hungary": {
+      "val": 35.9
+    },
+    "Iceland": {
+      "val": 44.01
+    },
+    "Ireland": {
+      "val": 31.26
+    },
+    "Italy": {
+      "val": 23.27
+    },
+    "Kosovo": {
+      "val": "NA"
     },
     "Latvia": {
-      "2014": 42.05,
-      "2019": 43.54
+      "val": 43.54
     },
     "Lithuania": {
-      "2014": 35.36,
-      "2019": 38.59
+      "val": 38.59
     },
     "Luxembourg": {
-      "2014": 17.9,
-      "2019": "NA"
+      "val": "NA"
     },
-    "Netherlands": {
-      "2014": 24.05,
-      "2019": 26.01
+    "Macedonia": {
+      "val": "NA"
+    },
+    "Moldova": {
+      "val": "NA"
     },
     "Montenegro": {
-      "2014": 24.62,
-      "2019": 28.2
+      "val": 28.2
+    },
+    "Netherlands": {
+      "val": 26.01
     },
     "Norway": {
-      "2014": 33.32,
-      "2019": 32.75
-    },
-    "Romania": {
-      "2014": 30.73,
-      "2019": 34.19
-    },
-    "Portugal": {
-      "2014": 31.84,
-      "2019": 36.97
+      "val": 32.75
     },
     "Poland": {
-      "2014": 36.36,
-      "2019": 41.15
+      "val": 41.15
+    },
+    "Portugal": {
+      "val": 36.97
     },
     "Republic of Serbia": {
-      "2014": 31.46,
-      "2019": 33.57
+      "val": 33.57
+    },
+    "Romania": {
+      "val": 34.19
     },
     "Slovakia": {
-      "2014": 28.22,
-      "2019": 33.3
-    },
-    "Sweden": {
-      "2014": 37.47,
-      "2019": 41.85
+      "val": 33.3
     },
     "Slovenia": {
-      "2014": 36.47,
-      "2019": 40.51
+      "val": 40.51
+    }, 
+    "Spain": {
+      "val": 33.72
+    },
+    "Sweden": {
+      "val": 41.85
+    },
+    "Switzerland": {
+      "val": 23.46
+    },
+    "Ukraine": {
+      "val": "NA"
+    },
+    "United Kingdom": {
+      "val": 34.91
+    }
+  },
+  "Corruption Perception Index in 2018 (on a scale of 0-100)": {
+    "Albania": {
+      "val": 36
+    },
+    "Austria": {
+      "val": 76
+    },
+    "Belarus": {
+      "val": "NA"
+    },
+    "Belgium": {
+      "val": 75
+    },
+    "Bosnia and Herzegovina": {
+      "val": 38
+    },
+    "Bulgaria": {
+      "val": 42
+    },
+    "Croatia": {
+      "val": 48
+    },
+    "Czech Republic": {
+      "val": 59
+    },
+    "Denmark": {
+      "val": 88
+    },
+    "Estonia": {
+      "val": 73
+    },
+    "Finland": {
+      "val": 85
+    },
+    "France": {
+      "val": 72
+    },
+    "Germany": {
+      "val": 80
+    },
+    "Greece": {
+      "val": 45
+    },
+    "Hungary": {
+      "val": 46
+    },
+    "Iceland": {
+      "val": 76
+    },
+    "Ireland": {
+      "val": 73
+    },
+    "Italy": {
+      "val": 52
+    },
+    "Kosovo": {
+      "val": "NA"
+    },
+    "Latvia": {
+      "val": 58
+    },
+    "Lithuania": {
+      "val": 59
+    },
+    "Luxembourg": {
+      "val": 81
+    },
+    "Macedonia": {
+      "val": "NA"
+    },
+    "Moldova": {
+      "val": 33
+    },
+    "Montenegro": {
+      "val": 45
+    },
+    "Netherlands": {
+      "val": 82
+    },
+    "Norway": {
+      "val": 84
+    },
+    "Poland": {
+      "val": 60
+    },
+    "Portugal": {
+      "val": 64
+    },
+    "Republic of Serbia": {
+      "val": 39
+    },
+    "Romania": {
+      "val": 47
+    },
+    "Slovakia": {
+      "val": 50
+    },
+    "Slovenia": {
+      "val": 60
+    },
+    "Spain": {
+      "val": 58
+    },
+    "Sweden": {
+      "val": 85
+    },
+    "Switzerland": {
+      "val": 85
+    },
+    "Ukraine": {
+      "val": 32
+    },
+    "United Kingdom": {
+      "val": 80
+    }
+  },
+  "Share of children who report being bullied in 2015 (%)": {
+    "Albania": {
+      "val": 43.3
+    },
+    "Austria": {
+      "val": 41
+    },
+    "Belarus": {
+      "val": 25.8
+    },
+    "Belgium": {
+      "val": 37
+    },
+    "Bosnia and Herzegovina": {
+      "val": "NA"
+    },
+    "Bulgaria": {
+      "val": 23.7
+    },
+    "Croatia": {
+      "val": 16
+    },
+    "Czech Republic": {
+      "val": 16
+    },
+    "Denmark": {
+      "val": 17
+    },
+    "Estonia": {
+      "val": 37
+    },
+    "Finland": {
+      "val": 28
+    },
+    "France": {
+      "val": 32
+    },
+    "Germany": {
+      "val": 30
+    },
+    "Greece": {
+      "val": 29
+    },
+    "Hungary": {
+      "val": 24
+    },
+    "Iceland": {
+      "val": 16
+    },
+    "Ireland": {
+      "val": 26
+    },
+    "Italy": {
+      "val": 9
+    },
+    "Kosovo": {
+      "val": "NA"
+    },
+    "Latvia": {
+      "val": 43
+    },
+    "Lithuania": {
+      "val": 52
+    },
+    "Luxembourg": {
+      "val": 28
+    },
+    "Macedonia": {
+      "val": 20
+    },
+    "Moldova": {
+      "val": 38.3
+    },
+    "Montenegro": {
+      "val": 25.9
+    },
+    "Netherlands": {
+      "val": 21
+    },
+    "Norway": {
+      "val": 23
+    },
+    "Poland": {
+      "val": 24
+    },
+    "Portugal": {
+      "val": 37
+    },
+    "Republic of Serbia": {
+      "val": 34.7
+    },
+    "Romania": {
+      "val": 41
+    },
+    "Slovakia": {
+      "val": 25
+    },
+    "Slovenia": {
+      "val": 20
+    },
+    "Spain": {
+      "val": 14
+    },
+    "Sweden": {
+      "val": 11
+    },
+    "Switzerland": {
+      "val": 34
+    },
+    "Ukraine": {
+      "val": 41
+    },
+    "United Kingdom": {
+      "val": 25
+    }
+  },
+  "Share that disagrees that vaccines are safe in 2018 (%)": {
+    "Albania": {
+      "val": 15.8
+    },
+    "Austria": {
+      "val": 21.1
+    },
+    "Belarus": {
+      "val": 14.8
+    },
+    "Belgium": {
+      "val": 20.6
+    },
+    "Bosnia and Herzegovina": {
+      "val": 8.3
+    },
+    "Bulgaria": {
+      "val": 15.6
+    },
+    "Croatia": {
+      "val": 6.8
+    },
+    "Czech Republic": {
+      "val": 6.6
+    },
+    "Denmark": {
+      "val": 9
+    },
+    "Estonia": {
+      "val": 13.5
+    },
+    "Finland": {
+      "val": 8
+    },
+    "France": {
+      "val": 33.3
+    },
+    "Germany": {
+      "val": 12.9
+    },
+    "Greece": {
+      "val": 3.6
+    },
+    "Hungary": {
+      "val": 2.6
+    },
+    "Iceland": {
+      "val": 21.3
+    },
+    "Ireland": {
+      "val": 9.4
+    },
+    "Italy": {
+      "val": 13.7
+    },
+    "Kosovo": {
+      "val": 5.4
+    },
+    "Latvia": {
+      "val": 17.1
+    },
+    "Lithuania": {
+      "val": 8.3
+    },
+    "Luxembourg": {
+      "val": 12.4
+    },
+    "Macedonia": {
+      "val": 13.5
+    },
+    "Moldova": {
+      "val": 10.7
+    },
+    "Montenegro": {
+      "val": 13.4
+    },
+    "Netherlands": {
+      "val": 17
+    },
+    "Norway": {
+      "val": 5.7
+    },
+    "Poland": {
+      "val": 5.3
+    },
+    "Portugal": {
+      "val": 5.1
+    },
+    "Republic of Serbia": {
+      "val": 9.2
+    },
+    "Romania": {
+      "val": 12.9
+    },
+    "Slovakia": {
+      "val": 6.4
+    },
+    "Slovenia": {
+      "val": 12.3
+    },
+    "Spain": {
+      "val": 7
+    },
+    "Sweden": {
+      "val": 12.3
+    },
+    "Switzerland": {
+      "val": 21.5
+    },
+    "Ukraine": {
+      "val": 15.3
+    },
+    "United Kingdom": {
+      "val": 8.7
+    }
+  },
+  "Outdoor air pollution death rate in 2019 (deaths per 100,000)": {
+    "Albania": {
+      "val": 37.5
+    },
+    "Austria": {
+      "val": 13.6
+    },
+    "Belarus": {
+      "val": 52.9
+    },
+    "Belgium": {
+      "val": 15
+    },
+    "Bosnia and Herzegovina": {
+      "val": 64.6
+    },
+    "Bulgaria": {
+      "val": 63.8
+    },
+    "Croatia": {
+      "val": 35.3
+    },
+    "Czech Republic": {
+      "val": 30.2
+    },
+    "Denmark": {
+      "val": 12.1
+    },
+    "Estonia": {
+      "val": 5.9
+    },
+    "Finland": {
+      "val": 3.1
+    },
+    "France": {
+      "val": 9.4
+    },
+    "Germany": {
+      "val": 14.1
+    },
+    "Greece": {
+      "val": 23.1
+    },
+    "Hungary": {
+      "val": 37.2
+    },
+    "Iceland": {
+      "val": 3.1
+    },
+    "Ireland": {
+      "val": 7.2
+    },
+    "Italy": {
+      "val": 16.6
+    },
+    "Kosovo": {
+      "val": "NA"
+    },
+    "Latvia": {
+      "val": 26.7
+    },
+    "Lithuania": {
+      "val": 20.9
+    },
+    "Luxembourg": {
+      "val": 9.6
+    },
+    "Macedonia": {
+      "val": 99.2
+    },
+    "Moldova": {
+      "val": 37.7
+    },
+    "Montenegro": {
+      "val": 60
+    },
+    "Netherlands": {
+      "val": 13.9
+    },
+    "Norway": {
+      "val": 4.4
+    },
+    "Poland": {
+      "val": 39.6
+    },
+    "Portugal": {
+      "val": 8.7
+    },
+    "Republic of Serbia": {
+      "val": 70.2
+    },
+    "Romania": {
+      "val": 38.9
+    },
+    "Slovakia": {
+      "val": 39.2
+    },
+    "Slovenia": {
+      "val": 18.8
+    },
+    "Spain": {
+      "val": 10.3
+    },
+    "Sweden": {
+      "val": 3.2
+    },
+    "Switzerland": {
+      "val": 8.2
+    },
+    "Ukraine": {
+      "val": 57.4
+    },
+    "United Kingdom": {
+      "val": 11.2
+    }
+  },
+  "Total tax revenues as share of GDP in 2019 (%)": {
+    "Albania": {
+      "val": 25.1
+    },
+    "Austria": {
+      "val": 43.1
+    },
+    "Belarus": {
+      "val": 34.6
+    },
+    "Belgium": {
+      "val": 45
+    },
+    "Bosnia and Herzegovina": {
+      "val": 37.9
+    },
+    "Bulgaria": {
+      "val": 30.1
+    },
+    "Croatia": {
+      "val": 38.6
+    },
+    "Czech Republic": {
+      "val": 35
+    },
+    "Denmark": {
+      "val": 46.7
+    },
+    "Estonia": {
+      "val": 33.3
+    },
+    "Finland": {
+      "val": 42.3
+    },
+    "France": {
+      "val": 47.2
+    },
+    "Germany": {
+      "val": 39
+    },
+    "Greece": {
+      "val": 23.1
+    },
+    "Hungary": {
+      "val": 35.2
+    },
+    "Iceland": {
+      "val": 35.1
+    },
+    "Ireland": {
+      "val": 22.7
+    },
+    "Italy": {
+      "val": 42.7
+    },
+    "Kosovo": {
+      "val": 23.4
+    },
+    "Latvia": {
+      "val": 31.6
+    },
+    "Lithuania": {
+      "val": 30.4
+    },
+    "Luxembourg": {
+      "val": 40.6
+    },
+    "Macedonia": {
+      "val": 25.9
+    },
+    "Moldova": {
+      "val": 27.8
+    },
+    "Montenegro": {
+      "val": 37
+    },
+    "Netherlands": {
+      "val": 39.8
+    },
+    "Norway": {
+      "val": 39.9
+    },
+    "Poland": {
+      "val": 35.2
+    },
+    "Portugal": {
+      "val": 36.8
+    },
+    "Republic of Serbia": {
+      "val": "NA"
+    },
+    "Romania": {
+      "val": 26.7
+    },
+    "Slovakia": {
+      "val": 35.1
+    },
+    "Slovenia": {
+      "val": 37.6
+    },
+    "Spain": {
+      "val": 35.3
+    },
+    "Sweden": {
+      "val": 43.4
+    },
+    "Switzerland": {
+      "val": 27.4
+    },
+    "Ukraine": {
+      "val": 32.5
+    },
+    "United Kingdom": {
+      "val": 34.3
     }
   }
 }
