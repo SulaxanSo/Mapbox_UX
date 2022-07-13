@@ -128,6 +128,22 @@ const App = () => {
   }
 
   //CHOROPLETH MAPS
+  let colors_two = [
+    '#4668ab',
+    '#3b62a7',
+    '#2f5ca3',
+    '#2057a0',
+    '#08519c'
+    ];
+
+  let colors_three = [
+    '#5572b1',
+    '#496aac',
+    '#3c63a7',
+    '#295aa2',
+    '#08519c'
+    ];
+
   let colors_four = [
     '#617ab6',
     '#5371b0',
@@ -136,6 +152,14 @@ const App = () => {
     '#08519c'
     ];
   
+  let colors_five = [
+    '#7186bd',
+    '#5f79b5',
+    '#4c6cad',
+    '#335ea5',
+    '#08519c'
+    ];
+
   let colors_six = [
     '#7e90c3',
     '#687fb9',
@@ -143,12 +167,27 @@ const App = () => {
     '#3a62a7',
     '#08519c'
     ];
-
+  let colors_seven = [
+    '#8b9ac9',
+    '#7186bd',
+    '#5974b2',
+    '#3c63a8',
+    '#08519c'
+    ];
+  
   let colors_eight = [
     '#9ca8d0',
     '#7f90c3',
     '#627bb6',
     '#4266aa',
+    '#08519c'
+    ];
+
+  let colors_nine = [
+    '#adb6d8',
+    '#8a99c8',
+    '#6980b9',
+    '#4869ac',
     '#08519c'
     ];
     
@@ -160,30 +199,45 @@ const App = () => {
     '#08519c'
     ];
 
-  let colors_twelve = [
-    '#d9dded',
-    '#a9b3d7',
-    '#7d8fc2',
-    '#5270b0',
+  let colors_eleven = [
+    '#cad0e6',
+    '#9faad2',
+    '#768abf',
+    '#4f6eaf',
     '#08519c'
     ];
   
   let current_col_palette;
   switch (col_dist) {
+    case 2:
+      current_col_palette = colors_two;
+        break;
+    case 3:
+      current_col_palette = colors_three;
+        break;
     case 4:
       current_col_palette = colors_four;
+        break;
+    case 5:
+      current_col_palette = colors_five;
         break;
     case 6:
       current_col_palette = colors_six;
         break;
+    case 7:
+      current_col_palette = colors_seven;
+        break;
     case 8:
       current_col_palette = colors_eight;
+        break;
+    case 9:
+      current_col_palette = colors_nine;
         break;
     case 10:
       current_col_palette = colors_ten;
         break;
-    case 12:
-      current_col_palette = colors_twelve;
+    case 11:
+      current_col_palette = colors_eleven;
         break;
   }
 

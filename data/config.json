@@ -2,7 +2,7 @@
   "visualization_type": "choropleth",
   "graduated_symbol": {
     "constant":{
-      "current_constant": "constant_3",
+      "current_constant": "constant_6",
       "constant_1": 2.5,
       "constant_2": 5,
       "constant_3": 7.5,
@@ -17,7 +17,7 @@
   },
   "choropleth": {
     "color": {
-      "current_color_distance": "color_distance_3",
+      "current_color_distance": "color_distance_10",
       "color_distance_1": 2,
       "color_distance_2": 3,
       "color_distance_3": 4,
@@ -27,7 +27,7 @@
       "color_distance_7": 8,
       "color_distance_8": 9,
       "color_distance_9": 10,
-      "color_distance_10": 12
+      "color_distance_10": 11
     }
   },
   "dataset": {
