@@ -20,7 +20,11 @@ npm install
 react-native run-android
 ```
 
-The repository contains geospatial data and a geojson file with european country boundaries. You can find the files in the `data` folder. For better performance the resolution is set to low quality by default. To increase the resolution quality change the resolution from low to medium or high in App.js in line 6.
+## Geospatial Datasets and Country Boundaries
+The repository contains geospatial data and a geojson file with european country boundaries. You can find the files in the `data` folder. For better performance the resolution is set to low quality by default. To increase the resolution change it from low to medium or high in `App.js` in line 6. Country boundaries were downloaded from [https://geojson-maps.ash.ms](https://geojson-maps.ash.ms). The datasets displayed on the maps were open-source and were provided as JSON datasets from the articles at [Our World in Data](https://ourworldindata.org). 
+
+## Map Configuration
+The map can be configured in the `data/config.json` file. Here, you can set the visualization type to "graduated_symbol" or "choropleth". If the visualization type is "graduated_symbol", the size distance can be set as "current_constant". If the visualization type is "choropleth", the color distance can be set as "current_color_distance". In either way, in this prototype you can choose between ten different size and color distances. 
 
 ## Built with:
 - [React Native](https://reactnative.dev)
