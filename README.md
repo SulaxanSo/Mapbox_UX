@@ -13,12 +13,14 @@ To make the app run, follow the upcoming instructions.
 1. Download/Clone this repository.
 2. Install dependencies in root folder using npm:
 ```
-> npm install
+npm install
 ```
 3. Run the react-native application:
 ```
-> react-native run-android
+react-native run-android
 ```
+
+The repository contains geospatial data and a geojson file with european country boundaries. The files can be replaced / extended with data or files.
 
 ## Built with:
 - [React Native](https://reactnative.dev)
