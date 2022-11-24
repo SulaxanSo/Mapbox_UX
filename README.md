@@ -20,7 +20,7 @@ npm install
 react-native run-android
 ```
 
-The repository contains geospatial data and a geojson file with european country boundaries. You can find the files in the `data` folder. For better performance the resolution is set to low quality by default. To increase the resolution quality change the resolution from low to medium or high in App.js.
+The repository contains geospatial data and a geojson file with european country boundaries. You can find the files in the `data` folder. For better performance the resolution is set to low quality by default. To increase the resolution quality change the resolution from low to medium or high in App.js in line 6.
 
 ## Built with:
 - [React Native](https://reactnative.dev)
