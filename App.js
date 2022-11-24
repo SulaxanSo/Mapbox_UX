@@ -42,7 +42,92 @@ const App = () => {
   
   let geoSeries = new geostats(dataValues);
   let jenks = geoSeries.getClassJenks(no_classes);
-  console.log("JENKS:", jenks);
+  //console.log("JENKS:", jenks);
+
+  let first_class = [];
+  let second_class = [];
+  let third_class = [];
+  let fourth_class = [];
+  let fifth_class = [];
+
+  for(let country of eur_countries){
+    let countryValue = dataset[topic][country]["val"];
+    let class_number;
+    for (let j = 0; j <= no_classes-1; j++)  {
+      if (countryValue >= (jenks[j]) && countryValue <= (jenks[j + 1])) {
+        class_number = j+1;
+      }
+    }
+    switch (class_number) {
+      case 1:
+        first_class.push(country);
+          break;
+      case 2:
+        second_class.push(country);
+          break;
+      case 3:
+        third_class.push(country);
+          break;
+      case 4:
+        fourth_class.push(country);
+          break;
+      case 5:
+        fifth_class.push(country);
+          break;
+    }
+  }
+
+  // console.log(first_class);
+  // console.log(second_class);
+  // console.log(third_class);
+  // console.log(fourth_class);
+  // console.log(fifth_class);
+
+  // let country_eval = "Hungary";
+  // console.log();
+  // console.log(topic);
+  // console.log(country_eval);
+
+  // // LOWER
+  // if(second_class.includes(country_eval)){
+  //   console.log("LOWER THAN", country_eval, first_class);
+  // }else if(third_class.includes(country_eval)){
+  //   console.log("LOWER THAN", country_eval, first_class.concat(second_class).sort());
+  // }else if(fourth_class.includes(country_eval)){
+  //   console.log("LOWER THAN", country_eval, first_class.concat(second_class).concat(third_class).sort());
+  // }else if(fifth_class.includes(country_eval)){
+  //   console.log("LOWER THAN", country_eval, first_class.concat(second_class).concat(third_class).concat(fourth_class).sort());
+  // }else{
+  //   console.log("Not possible");
+  // }
+
+  // // SAME
+  // if(first_class.includes(country_eval)){
+  //   console.log("SAME AS", country_eval, first_class);
+  // }else if(second_class.includes(country_eval)){
+  //   console.log("SAME AS", country_eval, second_class);
+  // }else if(third_class.includes(country_eval)){
+  //   console.log("SAME AS", country_eval, third_class);
+  // }else if(fourth_class.includes(country_eval)){
+  //   console.log("SAME AS", country_eval, fourth_class);
+  // }else if(fifth_class.includes(country_eval)){
+  //   console.log("SAME AS", country_eval, fifth_class);
+  // }else{
+  //   console.log("Not possible");
+  // }
+
+  // // HIGHER
+  // if(first_class.includes(country_eval)){
+  //   console.log("HIGHER THAN", country_eval, second_class.concat(third_class).concat(fourth_class).concat(fifth_class).sort());
+  // }else if(second_class.includes(country_eval)){
+  //   console.log("HIGHER THAN", country_eval, third_class.concat(fourth_class).concat(fifth_class).sort());
+  // }else if(third_class.includes(country_eval)){
+  //   console.log("HIGHER THAN", country_eval, fourth_class.concat(fifth_class).sort());
+  // }else if(fourth_class.includes(country_eval)){
+  //   console.log("HIGHER THAN", country_eval, fifth_class);
+  // }else{
+  //   console.log("Not possible");
+  // }
 
   // calculating average size distance in dataset
   // let avg_size_dist = ((jenks[2]/jenks[1])+(jenks[3]/jenks[2])+(jenks[4]/jenks[3])+(jenks[5]/jenks[4]))/(no_classes-1);
@@ -67,7 +152,6 @@ const App = () => {
   for(let i= 1; i<=4; i++){
     sizes.push(sizes[0] + i * constant);
   }
-  console.log(sizes);
 
   let graduated_symbols = [];
 
@@ -375,8 +459,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     bottom: 30,
     left: 30,
-    height: 400,
-    width: 175,
+    height: 300,
+    width: 150,
     padding: 10,
     position: 'absolute',
     justifyContent: 'space-evenly'
@@ -391,8 +475,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   itemSymbol: {
-    height: 40, 
-    width: 40
+    height: 35, 
+    width: 35
   }, 
   itemText: {
     fontSize: 9,

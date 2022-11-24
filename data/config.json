@@ -1,8 +1,8 @@
 {
-  "visualization_type": "choropleth",
+  "visualization_type": "graduated_symbol",
   "graduated_symbol": {
     "constant":{
-      "current_constant": "constant_6",
+      "current_constant": "constant_4",
       "constant_1": 2.5,
       "constant_2": 5,
       "constant_3": 7.5,
@@ -38,6 +38,5 @@
     "dataset_4": "Total tax revenues as share of GDP in 2019 (%)",
     "dataset_5": "Corruption Perception Index in 2018 (on a scale of 0-100)",
     "dataset_6": "Outdoor air pollution death rate in 2019 (deaths per 100,000)"
-    
   }
 }
