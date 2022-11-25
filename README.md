@@ -26,11 +26,11 @@ The repository contains geospatial data and a geojson file with european country
 ## Map Configuration
 The map can be configured in the `data/config.json` file. Here, you can set the visualization type to "graduated_symbol" or "choropleth". In this prototype you can choose between ten different size and color distances. 
 
-Additional size distances can be added in the `data/config.json` file by adding another constant. Make sure to update the "current_constant" variable in line 5 to the newly added constant.
+Additional size distances can be added in the `data/config.json` file by adding another constant. This constant indicates the circle size difference in pixels between all neighboring classes. Make sure to update the "current_constant" variable in line 5 to the newly added constant.
 
-To add different color distances follow the instructions:
+Follow the instructions to add different color distances:
 
-1) Generate the color hexes by the [sequential color scheme generator](http://eyetracking.upol.cz/color/). Set the number of color scheme classes to 5 and define the color distances between all neighboring classes.
+1) Generate the color hexes using the [sequential color scheme generator](http://eyetracking.upol.cz/color/). Set the number of color scheme classes to 5 and define the color distances between all neighboring classes.
 2) Add the color hexes in `App.js` as an array in line 293.
 3) Add this case in the switch clause in line 326.
 4) Add another color distance in the `data/config.json` file and make sure to update the "current_color_distance" variable in line 20.
